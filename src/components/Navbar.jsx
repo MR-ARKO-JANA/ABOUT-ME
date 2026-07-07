@@ -4,9 +4,18 @@ import gsap from 'gsap';
 const NAV_LINKS = [
   { name: 'Home', href: '#' },
   { name: 'About', href: '#about' },
+  { name: 'Experience', href: '#experience' },
+  { name: 'Hackathons', href: '#hackathons' },
+  { name: 'Certificates', href: '#certificates' },
   { name: 'Projects', href: '#projects' },
   { name: 'Contact', href: '#contact' },
 ];
+
+const SOCIAL_LINKS = {
+  github: 'https://github.com/MR-ARKO-JANA',
+  linkedin: 'https://www.linkedin.com/in/arkojana',
+  twitter: 'https://x.com/JanaArko45187',
+};
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -97,22 +106,23 @@ export default function Navbar() {
         {/* Subtle Background Glow Mask */}
         <div 
           ref={glowRef}
-          className="pointer-events-none absolute w-[300px] h-[300px] bg-white/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 mix-blend-screen opacity-0 md:opacity-100 transition-opacity duration-300"
+          className="pointer-events-none absolute w-[300px] h-[300px] bg-cyan-400/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 mix-blend-screen opacity-0 md:opacity-100 transition-opacity duration-300"
         />
 
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center relative z-10">
           
           {/* Logo */}
-          <div className="flex items-center gap-2 cursor-pointer group">
-            {/* Minimalist Spider/Web-inspired SVG Logo */}
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-white transition-transform duration-500 group-hover:rotate-45 group-hover:scale-110">
-              <path d="M12 2L12 22M2 12L22 12M5 5L19 19M5 19L19 5" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-              <circle cx="12" cy="12" r="6" stroke="currentColor" strokeWidth="1" strokeDasharray="2 2" />
+          <a href="#" className="flex items-center gap-2 cursor-pointer group no-underline">
+            {/* Minimalist Code/Tech-inspired SVG Logo */}
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-cyan-400 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110">
+              <path d="M8 4L2 12L8 20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M16 4L22 12L16 20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <line x1="14" y1="4" x2="10" y2="20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
-            <span className="text-white font-bold tracking-widest uppercase text-sm ml-2 opacity-90 group-hover:opacity-100 transition-opacity">
-              Spider
+            <span className="text-white font-bold tracking-widest uppercase text-sm ml-1 opacity-90 group-hover:opacity-100 transition-opacity" style={{ fontFamily: "'Outfit', sans-serif" }}>
+              AK
             </span>
-          </div>
+          </a>
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center space-x-10">
@@ -125,21 +135,22 @@ export default function Navbar() {
               >
                 {link.name}
                 {/* Center-out underline animation */}
-                <span className="absolute -bottom-1 left-1/2 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
+                <span className="absolute -bottom-1 left-1/2 w-0 h-[1px] bg-cyan-400 transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
               </a>
             ))}
           </div>
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <button 
-              ref={el => linksRef.current[NAV_LINKS.length] = el} // animate with the links
-              className="relative px-6 py-2.5 rounded-full overflow-hidden group bg-transparent border border-white/20 text-white text-sm font-medium tracking-wider hover:border-white/60 transition-colors duration-300"
+            <a 
+              href="#contact"
+              ref={el => linksRef.current[NAV_LINKS.length] = el}
+              className="relative px-6 py-2.5 rounded-full overflow-hidden group bg-transparent border border-cyan-400/30 text-white text-sm font-medium tracking-wider hover:border-cyan-400/60 transition-colors duration-300 no-underline"
             >
               <span className="relative z-10 group-hover:text-black transition-colors duration-300">Let's Talk</span>
               {/* Button Inner Fill Effect */}
-              <div className="absolute inset-0 h-full w-full bg-white scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]" />
-            </button>
+              <div className="absolute inset-0 h-full w-full bg-cyan-400 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]" />
+            </a>
           </div>
 
           {/* Mobile Hamburger Toggle */}
@@ -172,17 +183,31 @@ export default function Navbar() {
               className="text-3xl font-light text-gray-400 hover:text-white transition-colors tracking-widest relative group"
             >
               {link.name}
-              <span className="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-1/2 group-hover:left-1/4"></span>
+              <span className="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-cyan-400 transition-all duration-300 group-hover:w-1/2 group-hover:left-1/4"></span>
             </a>
           ))}
           
-          <button 
+          {/* Social Links Row */}
+          <div className="flex justify-center space-x-6 pt-4">
+            <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-cyan-400 transition-colors duration-300">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+            <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-cyan-400 transition-colors duration-300">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href={SOCIAL_LINKS.twitter} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-cyan-400 transition-colors duration-300">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          </div>
+          
+          <a 
+            href="#contact"
             ref={el => mobileLinksRef.current[NAV_LINKS.length] = el}
             onClick={() => setIsMobileMenuOpen(false)}
-            className="mt-8 px-8 py-3 rounded-full border border-white text-white tracking-widest hover:bg-white hover:text-black transition-all duration-300"
+            className="mt-4 px-8 py-3 rounded-full border border-cyan-400 text-white tracking-widest hover:bg-cyan-400 hover:text-black transition-all duration-300 no-underline"
           >
             Hire Me
-          </button>
+          </a>
         </div>
       </div>
     </>
