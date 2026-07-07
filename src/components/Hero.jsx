@@ -4,7 +4,7 @@ import gsap from 'gsap';
 import { vertexShader, fragmentShader } from './HeroShaders';
 
 import imgSpiderman from '../assets/spiderman/20260407_055437.png';
-import imgMan from '../assets/man/1775519899126.png';
+import imgMan from '../assets/man/arkojana.jpeg';
 
 export default function Hero() {
   const containerRef = useRef(null);
@@ -79,14 +79,7 @@ export default function Hero() {
       textureLoader.loadAsync(imgSpiderman),
       textureLoader.loadAsync(imgMan)
     ]).then(([tex1, tex2]) => {
-      // Improve texture visual quality
-      tex1.generateMipmaps = false;
-      tex1.minFilter = THREE.LinearFilter;
-      tex1.magFilter = THREE.LinearFilter;
-      
-      tex2.generateMipmaps = false;
-      tex2.minFilter = THREE.LinearFilter;
-      tex2.magFilter = THREE.LinearFilter;
+      // Use default ThreeJS filters for high quality mipmapping
       
       uniforms.uTexture1.value = tex1;
       uniforms.uTexture2.value = tex2;
@@ -124,8 +117,7 @@ export default function Hero() {
       if(cursorRef.current) {
         gsap.set(cursorRef.current, {
            x: mouseCurrent.current.x * width,
-           y: mouseCurrent.current.y * height, // using normalized, so 0 top wait...
-           // Actually threejs UV y is 0 bottom, 1 top. But our uMouse is updated below. Let's fix cursor DOM below.
+           y: mouseCurrent.current.y * height,
         });
       }
 
@@ -146,8 +138,6 @@ export default function Hero() {
       
       // For DOM cursor, use standard coordinates
       if(cursorRef.current) {
-        // Just store regular pixel coords in DOM cursor directly for zero latency, 
-        // to have a quick cursor overlay if desired
         gsap.to(cursorRef.current, {
             x: e.clientX,
             y: e.clientY,
@@ -227,12 +217,11 @@ export default function Hero() {
       renderer.dispose();
       material.dispose();
       geometry.dispose();
-      // NOTE: should realistically dispose textures too 
     };
   }, []);
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-black flex items-center justify-center">
+    <div className="relative w-full h-screen overflow-hidden bg-black flex items-center justify-center">
       {/* Three.js Canvas Container */}
       <div 
         ref={containerRef} 
@@ -244,8 +233,8 @@ export default function Hero() {
         ref={cursorRef}
         className="fixed top-0 left-0 w-32 h-32 rounded-full pointer-events-none z-20 mix-blend-screen opacity-0 scale-0"
         style={{
-          background: 'radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%)',
-          transform: 'translate(-50%, -50%)' // Center the glow on the mouse point
+          background: 'radial-gradient(circle, rgba(6,182,212,0.15) 0%, rgba(6,182,212,0) 70%)',
+          transform: 'translate(-50%, -50%)'
         }}
       />
       
@@ -258,13 +247,13 @@ export default function Hero() {
             
           {/* Left Side: Intro and Title */}
           <div className="flex-1 max-w-lg lg:max-w-xl text-left">
-            <p className="text-sm md:text-base text-gray-300 font-medium tracking-widest uppercase mb-6 opacity-90 drop-shadow-md">
-              Hey, I’m Leeshark
+            <p className="text-sm md:text-base text-cyan-400 font-medium tracking-widest uppercase mb-6 opacity-90 drop-shadow-md">
+              Hey, I'm Arko Jana
             </p>
             
-            <h1 className="text-2xl md:text-3xl lg:text-[1rem] xl:text-[3.5rem] font-bold tracking-tighter drop-shadow-2xl leading-[1.05] font-sans">
-              Crafting Digital<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-500 font-serif italic font-light pr-2">Excellence</span> from<br />
+            <h1 className="text-2xl md:text-3xl lg:text-5xl xl:text-[3.5rem] font-bold tracking-tighter drop-shadow-2xl leading-[1.05]" style={{ fontFamily: "'Outfit', sans-serif" }}>
+              Building Intelligent<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 font-serif italic font-light pr-2">Systems</span> from<br />
               End to End
             </h1>
           </div>
@@ -272,12 +261,15 @@ export default function Hero() {
           {/* Right Side: Description and CTA */}
           <div className=" flex-1 max-w-md text-left md:text-right flex flex-col md:items-end">
             <p className="w-110 text-lg md:text-xl text-gray-300 drop-shadow-xl font-light tracking-wide leading-relaxed mb-8">
-              I build scalable web applications that merge striking design with robust, high-performance functionality. Seamless interactions, engineered for the future.
+              Full-Stack Developer & AI Engineer. I build scalable, intelligent applications — merging AI/ML with robust cloud-native architectures for real-world impact.
             </p>
             
-            <button className="pointer-events-auto px-8 py-4 rounded-full border border-white/30 text-white text-sm tracking-[0.2em] uppercase font-medium hover:bg-white hover:text-black hover:border-white transition-all duration-500 backdrop-blur-sm shadow-xl inline-block">
-              Start a Project
-            </button>
+            <a 
+              href="#projects"
+              className="pointer-events-auto px-8 py-4 rounded-full border border-cyan-400/30 text-white text-sm tracking-[0.2em] uppercase font-medium hover:bg-cyan-400 hover:text-black hover:border-cyan-400 transition-all duration-500 backdrop-blur-sm shadow-xl inline-block no-underline"
+            >
+              View My Work
+            </a>
           </div>
             
         </div>
