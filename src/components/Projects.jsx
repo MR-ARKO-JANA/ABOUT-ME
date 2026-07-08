@@ -2,38 +2,60 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import imgSpiderman from '../assets/spiderman/20260407_055437.png';
-import imgMan from '../assets/man/1775519899126.png';
+// Import project screenshots
+import imgNearhelp from '../assets/projects/nearhelp.png';
+import imgNyaya from '../assets/projects/nyaya-sahayak.png';
+import imgSplitwise from '../assets/projects/splitwise.png';
+import imgResume from '../assets/projects/ai-resume.png';
+import imgApads from '../assets/projects/apads.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const MISSIONS = [
+const PROJECTS = [
   {
     id: '01',
-    name: 'The Nexus Protocol',
-    description: 'Engineered a seamless, real-time communication platform built to handle thousands of concurrent global users.',
-    tech: ['React', 'WebSockets', 'Node.js', 'Tailwind'],
-    image: imgSpiderman,
-    link: '#',
+    name: 'NearHelp',
+    description: 'Real-time emergency response platform connecting people in crisis with nearby responders using geolocation, AI-powered guidance, and WebSocket communication.',
+    tech: ['Node.js', 'MongoDB', 'Socket.IO', 'Gemini AI', 'Leaflet.js'],
+    image: imgNearhelp,
+    link: 'https://github.com/MR-ARKO-JANA',
     blend: 'mix-blend-luminosity brightness-75',
   },
   {
     id: '02',
-    name: 'Operation: Aether',
-    description: 'A high-performance digital storefront optimized for secure, millisecond-latency checkout flows.',
-    tech: ['Next.js', 'PostgreSQL', 'Stripe API', 'GSAP'],
-    image: imgMan,
-    link: '#',
-    blend: 'mix-blend-luminosity grayscale',
+    name: 'Nyaya Sahayak',
+    description: 'AI-powered Hindi chargesheet review assistant with NER, crime classification, and semantic similarity — deployed on Google Cloud Run.',
+    tech: ['Python', 'Gemini AI', 'Streamlit', 'Docker', 'GCP'],
+    image: imgNyaya,
+    link: 'https://nyaya-sahayak-j7wnpg7szq-uc.a.run.app',
+    blend: 'mix-blend-luminosity brightness-80',
   },
   {
     id: '03',
-    name: 'Project Aegis',
-    description: 'A heavy-duty, fortified internal dashboard managing complex data infrastructures and visual analytics.',
-    tech: ['React', 'Python', 'GraphQL', 'AWS'],
-    image: imgSpiderman,
-    link: '#',
-    blend: 'mix-blend-overlay brightness-125 saturate-150',
+    name: 'Splitwise Clone',
+    description: 'Full-stack expense sharing app with real-time sync, analytics, multiple split types, and enterprise-grade security (JWT, Helmet, rate limiting).',
+    tech: ['Node.js', 'Express 5', 'MongoDB', 'Socket.IO', 'Chart.js'],
+    image: imgSplitwise,
+    link: 'https://github.com/MR-ARKO-JANA',
+    blend: 'mix-blend-luminosity grayscale',
+  },
+  {
+    id: '04',
+    name: 'AI Resume Screener',
+    description: 'Intelligent resume screening system with automated candidate evaluation, CI/CD pipeline, and Docker containerization.',
+    tech: ['Node.js', 'Express', 'MongoDB', 'Docker', 'Railway'],
+    image: imgResume,
+    link: 'https://github.com/MR-ARKO-JANA',
+    blend: 'mix-blend-luminosity brightness-75',
+  },
+  {
+    id: '05',
+    name: 'APADS',
+    description: 'AI-Powered Accident Detection System using Computer Vision for real-time detection with automated emergency alerts via SMS and email.',
+    tech: ['Python', 'TensorFlow', 'OpenCV', 'Flask', 'React', 'Docker'],
+    image: imgApads,
+    link: 'https://github.com/MR-ARKO-JANA',
+    blend: 'mix-blend-overlay brightness-110 saturate-125',
   }
 ];
 
@@ -53,8 +75,8 @@ const ProjectCard = ({ project }) => {
     
     // Apply 3D tilt mapped against mouse offset (multiplied by degrees of max tilt)
     gsap.to(cardRef.current, {
-      rotateY: x * 15, // tilt left/right up to 7.5 deg
-      rotateX: -y * 15, // tilt up/down up to 7.5 deg
+      rotateY: x * 15,
+      rotateX: -y * 15,
       transformPerspective: 1000,
       ease: 'power2.out',
       duration: 0.4
@@ -117,27 +139,27 @@ const ProjectCard = ({ project }) => {
           alt={project.name} 
           className={`absolute inset-0 w-full h-[120%] -top-[10%] object-cover object-center ${project.blend} transition-all duration-[1.5s]`}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/90 to-black/60 z-10" />
       </div>
 
       {/* Dynamic Hover Glow Layer Tracker */}
       <div 
         ref={glowRef}
-        className="absolute w-64 h-64 bg-red-500/10 rounded-full blur-[80px] pointer-events-none z-10 -translate-x-1/2 -translate-y-1/2 opacity-0 mix-blend-screen"
+        className="absolute w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px] pointer-events-none z-10 -translate-x-1/2 -translate-y-1/2 opacity-0 mix-blend-screen"
       />
       
       {/* Laser Border overlay on Hover */}
-      <div className="absolute inset-0 border border-red-500/0 group-hover:border-red-500/40 rounded-xl transition-colors duration-500 z-20 pointer-events-none" />
+      <div className="absolute inset-0 border border-cyan-400/0 group-hover:border-cyan-400/40 rounded-xl transition-colors duration-500 z-20 pointer-events-none" />
 
       {/* Foreground Content */}
-      <div className="absolute inset-0 z-30 p-8 flex flex-col justify-end pointer-events-none" style={{ transform: 'translateZ(30px)' }}> {/* Push text outward on Z axis */}
+      <div className="absolute inset-0 z-30 p-8 flex flex-col justify-end pointer-events-none" style={{ transform: 'translateZ(30px)' }}>
         
-        {/* Dossier Code */}
-        <div className="text-red-500/80 font-mono text-xs tracking-[0.3em] mb-2 font-bold uppercase transition-transform duration-500 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100">
-          File_ID // {project.id}
+        {/* Project Number */}
+        <div className="text-cyan-400/80 font-mono text-xs tracking-[0.3em] mb-2 font-bold uppercase transition-transform duration-500 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100">
+          Project // {project.id}
         </div>
         
-        <h3 className="text-3xl font-bold tracking-tight text-white mb-3 leading-none drop-shadow-xl font-sans">
+        <h3 className="text-3xl font-bold tracking-tight text-white mb-3 leading-none drop-shadow-xl" style={{ fontFamily: "'Outfit', sans-serif" }}>
           {project.name}
         </h3>
         
@@ -147,19 +169,19 @@ const ProjectCard = ({ project }) => {
         
         <div className="flex flex-wrap gap-2 mb-6 pointer-events-auto">
           {project.tech.map((tool) => (
-            <span key={tool} className="text-[10px] uppercase tracking-widest px-3 py-1.5 border border-white/20 rounded-full text-gray-300 font-medium">
+            <span key={tool} className="text-[10px] uppercase tracking-widest px-3 py-1.5 border border-cyan-400/20 rounded-full text-cyan-300/80 font-medium">
               {tool}
             </span>
           ))}
         </div>
         
         <div className="mt-auto pointer-events-auto w-fit">
-          <a href={project.link} className="flex items-center space-x-2 text-sm uppercase tracking-[0.2em] font-medium text-white group/link relative">
+          <a href={project.link} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-sm uppercase tracking-[0.2em] font-medium text-white group/link relative no-underline">
             <span className="relative overflow-hidden block">
-              <span className="block group-hover/link:-translate-y-full transition-transform duration-300">Access Record</span>
-              <span className="block absolute inset-0 translate-y-full group-hover/link:translate-y-0 transition-transform duration-300 text-red-400">Access Record</span>
+              <span className="block group-hover/link:-translate-y-full transition-transform duration-300">View Project</span>
+              <span className="block absolute inset-0 translate-y-full group-hover/link:translate-y-0 transition-transform duration-300 text-cyan-400">View Project</span>
             </span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform duration-300 text-red-500">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform duration-300 text-cyan-400">
               <line x1="5" y1="19" x2="19" y2="5"></line>
               <polyline points="10 5 19 5 19 14"></polyline>
             </svg>
@@ -216,18 +238,18 @@ export default function Projects() {
         {/* Header Block */}
         <div ref={headerRef} className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between border-b border-white/10 pb-8">
           <div className="max-w-2xl">
-            <h2 className="text-4xl md:text-5xl lg:text-[4.5rem] font-bold tracking-tighter text-white font-sans leading-none drop-shadow-lg mb-4">
-              Declassified <span className="font-serif italic font-light opacity-80 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-white pr-2">Missions</span>
+            <h2 className="text-4xl md:text-5xl lg:text-[4.5rem] font-bold tracking-tighter text-white leading-none drop-shadow-lg mb-4" style={{ fontFamily: "'Outfit', sans-serif" }}>
+              Featured <span className="font-serif italic font-light opacity-80 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 pr-2">Projects</span>
             </h2>
           </div>
           <p className="text-gray-400 font-light tracking-wide text-base md:text-lg max-w-sm mt-6 md:mt-0 leading-relaxed md:text-right">
-            Selected operations engineered for supreme performance and scale.
+            Real-world applications built with AI, full-stack engineering, and cloud-native architecture.
           </p>
         </div>
         
-        {/* Grid Container */}
+        {/* Grid Container — 2 cols on md, 3 cols on lg */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-12 place-items-center">
-          {VISIONS.map(project => (
+          {PROJECTS.map(project => (
             <ProjectCard key={project.id} project={project} />
           ))}
         </div>
@@ -241,6 +263,3 @@ export default function Projects() {
     </section>
   );
 }
-
-// Ensure the mapping variable aligns exactly with the constant 
-const VISIONS = MISSIONS;
