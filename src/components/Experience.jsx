@@ -125,42 +125,61 @@ export default function Experience() {
               {/* Timeline Dot */}
               <div className="absolute left-[-2rem] md:left-auto md:odd:-right-[5px] md:even:-left-[4px] top-2 w-[9px] h-[9px] bg-black border-2 border-cyan-400 rounded-full group-hover:scale-150 group-hover:bg-cyan-400 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.8)] transition-all duration-300 z-10" />
 
-              {/* Content Card */}
-              <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-cyan-400/30 transition-colors duration-500 backdrop-blur-sm relative overflow-hidden">
-                {/* Hover gradient sweep */}
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {/* Content Card Container for Electric Border */}
+              <div className="relative rounded-2xl overflow-hidden p-[2px]">
+                {/* Animated Electric Border Layer (Visible always, purple color) */}
+                <div 
+                  className="absolute inset-[-100%] z-0 animate-electric-border opacity-20 group-hover:opacity-100 transition-opacity duration-500 group-hover:[animation-duration:1.5s]"
+                  style={{
+                    background: 'conic-gradient(from 0deg, transparent 60%, #a855f7 100%)' // Purple
+                  }}
+                />
                 
-                <div className="relative z-10">
-                  <span className="text-cyan-400 font-mono text-xs tracking-[0.2em] uppercase font-bold mb-2 block">
-                    {exp.period}
-                  </span>
-                  <h3 className="text-2xl font-bold text-white mb-1" style={{ fontFamily: "'Outfit', sans-serif" }}>
-                    {exp.role}
-                  </h3>
-                  <h4 className="text-lg text-gray-300 font-medium mb-4 italic">
-                    {exp.company}
-                  </h4>
-                  <p className="text-gray-400 text-sm leading-relaxed mb-6 font-light">
-                    {exp.description}
-                  </p>
+                {/* Secondary Electric Border for intense glow on hover */}
+                <div 
+                  className="absolute inset-[-100%] z-0 animate-electric-border blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 group-hover:[animation-duration:1.5s]"
+                  style={{
+                    background: 'conic-gradient(from 0deg, transparent 60%, #a855f7 100%)'
+                  }}
+                />
+
+                {/* Content Card Inner */}
+                <div className="p-8 rounded-[14px] bg-[#050505] border border-white/5 group-hover:border-transparent transition-colors duration-500 backdrop-blur-sm relative overflow-hidden z-10 h-full">
+                  {/* Hover gradient sweep */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
                   
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {exp.skills.map((skill) => (
-                      <span key={skill} className="text-[10px] uppercase tracking-widest px-3 py-1 bg-white/5 border border-white/10 rounded-full text-gray-300">
-                        {skill}
-                      </span>
-                    ))}
+                  <div className="relative z-10">
+                    <span className="text-cyan-400 font-mono text-xs tracking-[0.2em] uppercase font-bold mb-2 block">
+                      {exp.period}
+                    </span>
+                    <h3 className="text-2xl font-bold text-white mb-1" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                      {exp.role}
+                    </h3>
+                    <h4 className="text-lg text-gray-300 font-medium mb-4 italic">
+                      {exp.company}
+                    </h4>
+                    <p className="text-gray-400 text-sm leading-relaxed mb-6 font-light">
+                      {exp.description}
+                    </p>
+                    
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {exp.skills.map((skill) => (
+                        <span key={skill} className="text-[10px] uppercase tracking-widest px-3 py-1 bg-white/5 border border-white/10 rounded-full text-gray-300 group-hover:border-cyan-500/30 transition-colors">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    {exp.link && (
+                      <a href={exp.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-2 text-xs uppercase tracking-[0.2em] font-medium text-cyan-400 hover:text-white transition-colors duration-300 no-underline group/btn">
+                        <span>View Credential</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transform group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300">
+                          <line x1="5" y1="19" x2="19" y2="5"></line>
+                          <polyline points="10 5 19 5 19 14"></polyline>
+                        </svg>
+                      </a>
+                    )}
                   </div>
-                  
-                  {exp.link && (
-                    <a href={exp.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-2 text-xs uppercase tracking-[0.2em] font-medium text-cyan-400 hover:text-white transition-colors duration-300 no-underline group/btn">
-                      <span>View Credential</span>
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transform group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300">
-                        <line x1="5" y1="19" x2="19" y2="5"></line>
-                        <polyline points="10 5 19 5 19 14"></polyline>
-                      </svg>
-                    </a>
-                  )}
                 </div>
               </div>
 

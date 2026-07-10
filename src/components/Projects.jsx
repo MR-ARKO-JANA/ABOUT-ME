@@ -125,14 +125,31 @@ const ProjectCard = ({ project }) => {
 
   return (
     <div 
-      className="project-card relative w-full h-[450px] rounded-xl overflow-hidden cursor-pointer group bg-black border border-white/10"
+      className="project-card relative w-full h-[450px] rounded-xl overflow-hidden cursor-pointer group bg-zinc-900 border border-white/10"
       style={{ transformStyle: 'preserve-3d' }}
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Background Image Layer */}
-      <div className="absolute inset-0 z-0 overflow-hidden bg-zinc-900">
+      {/* Animated Electric Border Layer (Visible always, brighter on hover) */}
+      <div 
+        className="absolute inset-[-100%] z-0 animate-electric-border opacity-30 group-hover:opacity-100 transition-opacity duration-500"
+        style={{
+          background: 'conic-gradient(from 0deg, transparent 50%, #06b6d4 100%)' // Cyan
+        }}
+      />
+      
+      {/* Secondary Electric Border for intense glow on hover */}
+      <div 
+        className="absolute inset-[-100%] z-0 animate-electric-border blur-lg opacity-0 group-hover:opacity-80 transition-opacity duration-500"
+        style={{
+          background: 'conic-gradient(from 0deg, transparent 50%, #06b6d4 100%)'
+        }}
+      />
+
+      {/* Inner Mask Container (Inset slightly to reveal the border underneath) */}
+      <div className="absolute inset-[2px] z-10 overflow-hidden bg-zinc-900 rounded-[10px]">
+        {/* Background Image Layer */}
         <img 
           ref={imageRef}
           src={project.image} 
@@ -145,14 +162,14 @@ const ProjectCard = ({ project }) => {
       {/* Dynamic Hover Glow Layer Tracker */}
       <div 
         ref={glowRef}
-        className="absolute w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px] pointer-events-none z-10 -translate-x-1/2 -translate-y-1/2 opacity-0 mix-blend-screen"
+        className="absolute w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px] pointer-events-none z-20 -translate-x-1/2 -translate-y-1/2 opacity-0 mix-blend-screen"
       />
       
-      {/* Laser Border overlay on Hover */}
-      <div className="absolute inset-0 border border-cyan-400/0 group-hover:border-cyan-400/40 rounded-xl transition-colors duration-500 z-20 pointer-events-none" />
+      {/* Laser Border overlay on Hover - keeping the original faint border as a base */}
+      <div className="absolute inset-0 border border-cyan-400/0 group-hover:border-cyan-400/20 rounded-xl transition-colors duration-500 z-30 pointer-events-none" />
 
       {/* Foreground Content */}
-      <div className="absolute inset-0 z-30 p-8 flex flex-col justify-end pointer-events-none" style={{ transform: 'translateZ(30px)' }}>
+      <div className="absolute inset-0 z-40 p-8 flex flex-col justify-end pointer-events-none" style={{ transform: 'translateZ(30px)' }}>
         
         {/* Project Number */}
         <div className="text-cyan-400/80 font-mono text-xs tracking-[0.3em] mb-2 font-bold uppercase transition-transform duration-500 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100">

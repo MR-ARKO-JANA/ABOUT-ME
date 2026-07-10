@@ -165,35 +165,53 @@ export default function Hackathons() {
             <div 
               key={achievement.id} 
               ref={el => cardsRef.current[index] = el}
-              className="relative p-10 rounded-2xl bg-black border border-white/5 cursor-crosshair group overflow-hidden"
+              className="relative p-[2px] rounded-2xl cursor-crosshair group overflow-hidden"
               style={{ transformStyle: 'preserve-3d' }}
               onMouseMove={(e) => handleMouseMove(e, cardsRef.current[index])}
               onMouseLeave={() => handleMouseLeave(cardsRef.current[index])}
             >
-              {/* Background gradient on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {/* Animated Electric Border Layer (Visible always, green color) */}
+              <div 
+                className="absolute inset-[-100%] z-0 animate-electric-border opacity-20 group-hover:opacity-100 transition-opacity duration-500 group-hover:[animation-duration:1s]"
+                style={{
+                  background: 'conic-gradient(from 0deg, transparent 60%, #4ade80 100%)' // Green
+                }}
+              />
               
-              {/* Border glow */}
-              <div className="absolute inset-0 border border-purple-400/0 group-hover:border-purple-400/30 rounded-2xl transition-colors duration-500 pointer-events-none" />
+              {/* Secondary Electric Border for intense glow on hover */}
+              <div 
+                className="absolute inset-[-100%] z-0 animate-electric-border blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 group-hover:[animation-duration:1s]"
+                style={{
+                  background: 'conic-gradient(from 0deg, transparent 60%, #4ade80 100%)'
+                }}
+              />
 
-              <div className="relative z-10 pointer-events-none" style={{ transform: 'translateZ(30px)' }}>
-                {achievement.icon}
+              <div className="relative z-10 p-10 rounded-[14px] bg-black border border-white/5 group-hover:border-transparent transition-colors overflow-hidden h-full">
+                {/* Background gradient on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
-                <span className="text-gray-500 font-mono text-xs tracking-widest block mb-2 group-hover:text-purple-400 transition-colors duration-300">
-                  {achievement.year}
-                </span>
-                
-                <h3 className="text-2xl font-bold text-white mb-2" style={{ fontFamily: "'Outfit', sans-serif" }}>
-                  {achievement.name}
-                </h3>
-                
-                <p className="text-cyan-400 font-medium text-sm mb-4 uppercase tracking-wider">
-                  {achievement.role}
-                </p>
-                
-                <p className="text-gray-400 text-sm leading-relaxed font-light">
-                  {achievement.description}
-                </p>
+                {/* Border glow */}
+                <div className="absolute inset-0 border border-purple-400/0 group-hover:border-purple-400/10 rounded-[14px] transition-colors duration-500 pointer-events-none" />
+
+                <div className="relative z-20 pointer-events-none" style={{ transform: 'translateZ(30px)' }}>
+                  {achievement.icon}
+                  
+                  <span className="text-gray-500 font-mono text-xs tracking-widest block mb-2 group-hover:text-purple-400 transition-colors duration-300">
+                    {achievement.year}
+                  </span>
+                  
+                  <h3 className="text-2xl font-bold text-white mb-2" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                    {achievement.name}
+                  </h3>
+                  
+                  <p className="text-cyan-400 font-medium text-sm mb-4 uppercase tracking-wider">
+                    {achievement.role}
+                  </p>
+                  
+                  <p className="text-gray-400 text-sm leading-relaxed font-light">
+                    {achievement.description}
+                  </p>
+                </div>
               </div>
             </div>
           ))}

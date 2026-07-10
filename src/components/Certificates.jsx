@@ -113,23 +113,41 @@ export default function Certificates() {
           {marqueeItems.map((cert, index) => (
             <div 
               key={`${cert.id}-${index}`} 
-              className="magnetic cert-item flex-shrink-0 w-[350px] md:w-[450px] flex flex-col justify-between p-8 rounded-3xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.06] hover:border-blue-400/30 transition-all duration-300"
+              className="group magnetic cert-item flex-shrink-0 w-[350px] md:w-[450px] relative rounded-3xl overflow-hidden p-[2px]"
             >
-              <div>
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors duration-300" style={{ fontFamily: "'Outfit', sans-serif" }}>
-                  {cert.name}
-                </h3>
-                <p className="text-gray-400 font-medium text-sm mb-8">
-                  {cert.issuer}
-                </p>
-              </div>
+              {/* Animated Electric Border Layer (Visible always, amber color) */}
+              <div 
+                className="absolute inset-[-100%] z-0 animate-electric-border opacity-30 group-hover:opacity-100 transition-opacity duration-500 group-hover:[animation-duration:2s]"
+                style={{
+                  background: 'conic-gradient(from 0deg, transparent 60%, #f59e0b 100%)' // Amber
+                }}
+              />
               
-              <div className="flex flex-wrap gap-2">
-                {cert.tags.map(tag => (
-                  <span key={tag} className="text-[10px] uppercase tracking-widest px-3 py-1 bg-black border border-white/10 rounded-full text-gray-300 group-hover:border-blue-400/20 transition-colors duration-300">
-                    {tag}
-                  </span>
-                ))}
+              {/* Secondary Electric Border for intense glow on hover */}
+              <div 
+                className="absolute inset-[-100%] z-0 animate-electric-border blur-md opacity-0 group-hover:opacity-90 transition-opacity duration-500 group-hover:[animation-duration:2s]"
+                style={{
+                  background: 'conic-gradient(from 0deg, transparent 60%, #f59e0b 100%)'
+                }}
+              />
+
+              <div className="flex flex-col justify-between p-8 rounded-[22px] bg-[#050505] border border-white/5 group-hover:border-transparent transition-all duration-500 relative z-10 h-full w-full">
+                <div>
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors duration-300" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                    {cert.name}
+                  </h3>
+                  <p className="text-gray-400 font-medium text-sm mb-8">
+                    {cert.issuer}
+                  </p>
+                </div>
+                
+                <div className="flex flex-wrap gap-2">
+                  {cert.tags.map(tag => (
+                    <span key={tag} className="text-[10px] uppercase tracking-widest px-3 py-1 bg-black border border-white/10 rounded-full text-gray-300 group-hover:border-blue-400/20 transition-colors duration-300">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           ))}
