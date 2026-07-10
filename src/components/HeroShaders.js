@@ -25,6 +25,7 @@ uniform float uRadius;
 uniform float uSoftness;
 uniform vec2 uResolution;
 uniform vec2 uImageResolution;
+uniform float uImageScale;
 
 varying vec2 vUv;
 
@@ -35,10 +36,17 @@ void main() {
   );
   
   vec2 centeredUv = vUv - vec2(0.5);
-  vec2 uvCover = centeredUv * ratio + vec2(0.5);
+  // Apply the scale factor (uImageScale > 1.0 makes the image smaller)
+  vec2 uvCover = (centeredUv * ratio * uImageScale) + vec2(0.5);
 
   vec4 color1 = texture2D(uTexture1, uvCover);
   
+  // If UVs are outside the image bounds [0, 1], we can set alpha to 0 
+  // to avoid texture clamping/stretching artifacts on the edges.
+  float inBounds = step(0.0, uvCover.x) * step(uvCover.x, 1.0) * 
+                   step(0.0, uvCover.y) * step(uvCover.y, 1.0);
+  color1 *= inBounds;
+
   vec2 screenRatio = vec2(uResolution.x / uResolution.y, 1.0);
   if (uResolution.y > uResolution.x) {
     screenRatio = vec2(1.0, uResolution.y / uResolution.x);
@@ -53,6 +61,8 @@ void main() {
   // Subtle edge distortion only on the mask edge
   vec2 distortedUv = uvCover + (mask * (1.0 - mask)) * 0.03 * uHovered;
   vec4 color2 = texture2D(uTexture2, distortedUv);
+  color2 *= step(0.0, distortedUv.x) * step(distortedUv.x, 1.0) * 
+            step(0.0, distortedUv.y) * step(distortedUv.y, 1.0);
 
   vec4 finalColor = mix(color1, color2, mask);
 

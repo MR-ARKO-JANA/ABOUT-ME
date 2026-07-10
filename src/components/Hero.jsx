@@ -70,7 +70,8 @@ export default function Hero() {
       uSoftness: { value: 0.15 }, // Softness of the edge
       uScale: { value: 0.05 }, // Scale zoom amount
       uResolution: { value: new THREE.Vector2(width, height) },
-      uImageResolution: { value: new THREE.Vector2(1920, 1080) } // Assuming 16:9 for default
+      uImageResolution: { value: new THREE.Vector2(1920, 1080) }, // Assuming 16:9 for default
+      uImageScale: { value: 1.4 } // Control image size (1.4 makes it smaller)
     };
     
     uniformRef.current = uniforms;
