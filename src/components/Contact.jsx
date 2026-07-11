@@ -89,7 +89,7 @@ export default function Contact() {
     >
       {/* Intense Background Glow */}
       <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
-        <div className="w-[800px] h-[500px] bg-cyan-600/10 rounded-full blur-[150px] mix-blend-screen opacity-50" />
+        <div className="w-[800px] h-[500px] bg-cyan-600/10 rounded-full blur-[150px]  opacity-50" />
       </div>
 
       <div className="max-w-2xl w-full relative z-10 flex flex-col items-center text-center">

@@ -89,7 +89,7 @@ export default function CustomCursor() {
     <>
       <div 
         ref={cursorRef} 
-        className={`fixed top-0 left-0 w-8 h-8 rounded-full border border-white/30 pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-difference ${!isVisible ? 'hidden' : ''}`}
+        className={`fixed top-0 left-0 w-8 h-8 rounded-full border border-white/30 pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 ${!isVisible ? 'hidden' : ''}`}
       />
       <div 
         ref={dotRef} 

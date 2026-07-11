@@ -162,7 +162,7 @@ const ProjectCard = ({ project }) => {
       {/* Dynamic Hover Glow Layer Tracker */}
       <div 
         ref={glowRef}
-        className="absolute w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px] pointer-events-none z-20 -translate-x-1/2 -translate-y-1/2 opacity-0 mix-blend-screen"
+        className="absolute w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px] pointer-events-none z-20 -translate-x-1/2 -translate-y-1/2 opacity-0 "
       />
       
       {/* Laser Border overlay on Hover - keeping the original faint border as a base */}

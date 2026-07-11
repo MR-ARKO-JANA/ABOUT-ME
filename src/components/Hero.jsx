@@ -232,7 +232,7 @@ export default function Hero() {
       {/* Custom Cursor / Light Bloom Overlay */}
       <div 
         ref={cursorRef}
-        className="fixed top-0 left-0 w-32 h-32 rounded-full pointer-events-none z-20 mix-blend-screen opacity-0 scale-0"
+        className="fixed top-0 left-0 w-32 h-32 rounded-full pointer-events-none z-20 opacity-0 scale-0"
         style={{
           background: 'radial-gradient(circle, rgba(6,182,212,0.15) 0%, rgba(6,182,212,0) 70%)',
           transform: 'translate(-50%, -50%)'

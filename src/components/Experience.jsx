@@ -100,7 +100,7 @@ export default function Experience() {
     >
       <Particles count={40} color="rgba(6, 182, 212, 0.3)" />
       {/* Background glow */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-cyan-900/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none -translate-y-1/2 -translate-x-1/2" />
+      <div className="absolute top-1/2 left-0 w-96 h-96 bg-cyan-900/10 rounded-full blur-[120px]  pointer-events-none -translate-y-1/2 -translate-x-1/2" />
       
       <div className="max-w-[90rem] mx-auto w-full relative z-10">
         

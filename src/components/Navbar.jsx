@@ -94,20 +94,21 @@ export default function Navbar() {
 
   return (
     <>
-      <nav 
-        ref={navRef}
-        onMouseMove={handleMouseMove}
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 overflow-hidden ${
-          isScrolled 
-            ? 'bg-black/40 backdrop-blur-md border-b border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.5)] py-4' 
-            : 'bg-transparent py-6'
-        }`}
-      >
-        {/* Subtle Background Glow Mask */}
-        <div 
-          ref={glowRef}
-          className="pointer-events-none absolute w-[300px] h-[300px] bg-cyan-400/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 mix-blend-screen opacity-0 md:opacity-100 transition-opacity duration-300"
-        />
+      <div className="fixed top-0 left-0 w-full z-50 flex justify-center pointer-events-none mt-4 px-4 transition-all duration-500">
+        <nav 
+          ref={navRef}
+          onMouseMove={handleMouseMove}
+          className={`pointer-events-auto relative transition-all duration-500 overflow-hidden ${
+            isScrolled 
+              ? 'w-full max-w-5xl bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-[0_8px_32px_rgba(0,0,0,0.37)] py-3 px-6' 
+              : 'w-full max-w-7xl bg-transparent py-6 px-6'
+          }`}
+        >
+          {/* Subtle Background Glow Mask */}
+          <div 
+            ref={glowRef}
+            className="pointer-events-none absolute w-[300px] h-[300px] bg-cyan-400/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 opacity-0 md:opacity-100 transition-opacity duration-300"
+          />
 
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center relative z-10">
           
@@ -166,6 +167,7 @@ export default function Navbar() {
           </button>
         </div>
       </nav>
+      </div>
 
       {/* Mobile Fullscreen Menu */}
       <div 
