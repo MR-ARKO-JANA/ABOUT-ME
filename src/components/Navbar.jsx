@@ -98,10 +98,10 @@ export default function Navbar() {
         <nav 
           ref={navRef}
           onMouseMove={handleMouseMove}
-          className={`pointer-events-auto relative transition-all duration-500 overflow-hidden ${
+          className={`pointer-events-auto relative transition-all duration-500 overflow-hidden w-max mx-auto bg-white/10 backdrop-blur-[30px] border border-white/20 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.4)] ${
             isScrolled 
-              ? 'w-max mx-auto bg-white/10 backdrop-blur-[30px] border border-white/20 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.4)] py-2 px-4' 
-              : 'w-full max-w-7xl bg-transparent py-6 px-6'
+              ? 'py-2 px-4' 
+              : 'py-3 px-5 mt-2'
           }`}
         >
           {/* Subtle Background Glow Mask */}
