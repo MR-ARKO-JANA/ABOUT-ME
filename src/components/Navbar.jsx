@@ -100,7 +100,7 @@ export default function Navbar() {
           onMouseMove={handleMouseMove}
           className={`pointer-events-auto relative transition-all duration-500 overflow-hidden ${
             isScrolled 
-              ? 'w-full max-w-5xl bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-[0_8px_32px_rgba(0,0,0,0.37)] py-3 px-6' 
+              ? 'w-full max-w-5xl bg-white/5 backdrop-blur-2xl border border-white/5 rounded-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.15),0_8px_32px_rgba(0,0,0,0.5)] py-3 px-6' 
               : 'w-full max-w-7xl bg-transparent py-6 px-6'
           }`}
         >
