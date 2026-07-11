@@ -100,19 +100,20 @@ export default function Navbar() {
           onMouseMove={handleMouseMove}
           className={`pointer-events-auto relative transition-all duration-500 overflow-hidden ${
             isScrolled 
-              ? 'w-full max-w-5xl bg-white/5 backdrop-blur-2xl border border-white/5 rounded-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.15),0_8px_32px_rgba(0,0,0,0.5)] py-3 px-6' 
+              ? 'w-max mx-auto bg-white/10 backdrop-blur-[30px] border border-white/20 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.4)] py-2 px-4' 
               : 'w-full max-w-7xl bg-transparent py-6 px-6'
           }`}
         >
           {/* Subtle Background Glow Mask */}
           <div 
             ref={glowRef}
-            className="pointer-events-none absolute w-[300px] h-[300px] bg-cyan-400/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 opacity-0 md:opacity-100 transition-opacity duration-300"
+            className="pointer-events-none absolute w-[300px] h-[300px] bg-white/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 opacity-0 md:opacity-100 transition-opacity duration-300"
           />
 
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center relative z-10">
+        <div className="flex justify-between items-center relative z-10 gap-8">
           
-          {/* Logo */}
+          <div className="flex items-center gap-4">
+            {/* Logo */}
           <a href="#" className="flex items-center gap-2 cursor-pointer group no-underline">
             {/* Minimalist Code/Tech-inspired SVG Logo */}
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-cyan-400 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110">
@@ -125,8 +126,11 @@ export default function Navbar() {
             </span>
           </a>
 
+          {/* Vertical Divider */}
+          <div className="w-[1px] h-6 bg-white/20 hidden md:block"></div>
+
           {/* Desktop Links */}
-          <div className="hidden md:flex items-center space-x-10">
+          <div className="hidden md:flex items-center space-x-6">
             {NAV_LINKS.map((link, index) => (
               <a 
                 key={link.name} 
@@ -146,12 +150,11 @@ export default function Navbar() {
             <a 
               href="#contact"
               ref={el => linksRef.current[NAV_LINKS.length] = el}
-              className="relative px-6 py-2.5 rounded-full overflow-hidden group bg-transparent border border-cyan-400/30 text-white text-sm font-medium tracking-wider hover:border-cyan-400/60 transition-colors duration-300 no-underline"
+              className="px-5 py-2 rounded-full bg-white text-black text-xs font-bold tracking-wide hover:bg-gray-200 transition-colors duration-300 no-underline"
             >
-              <span className="relative z-10 group-hover:text-black transition-colors duration-300">Let's Talk</span>
-              {/* Button Inner Fill Effect */}
-              <div className="absolute inset-0 h-full w-full bg-cyan-400 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]" />
+              Let's Talk
             </a>
+          </div>
           </div>
 
           {/* Mobile Hamburger Toggle */}
