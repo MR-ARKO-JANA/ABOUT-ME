@@ -51,26 +51,35 @@ export default function Particles({ count = 30, color = "rgba(6, 182, 212, 0.5)"
       }
     };
 
+    let isVisible = true;
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+    });
+    observer.observe(canvas);
+
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      // Optional: Draw connections between close particles
-      for (let i = 0; i < particles.length; i++) {
-        particles[i].update();
-        particles[i].draw();
+      if (isVisible) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         
-        for (let j = i; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
+        // Optional: Draw connections between close particles
+        for (let i = 0; i < particles.length; i++) {
+          particles[i].update();
+          particles[i].draw();
           
-          if (distance < 100) {
-            ctx.beginPath();
-            ctx.strokeStyle = color.replace('0.5', `${0.15 * (1 - distance / 100)}`); // fade out
-            ctx.lineWidth = 0.5;
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const distSq = dx * dx + dy * dy;
+            
+            if (distSq < 10000) {
+              const distance = Math.sqrt(distSq);
+              ctx.beginPath();
+              ctx.strokeStyle = color.replace('0.5', `${0.15 * (1 - distance / 100)}`); // fade out
+              ctx.lineWidth = 0.5;
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.stroke();
+            }
           }
         }
       }
@@ -84,6 +93,7 @@ export default function Particles({ count = 30, color = "rgba(6, 182, 212, 0.5)"
     return () => {
       window.removeEventListener('resize', resize);
       cancelAnimationFrame(animationFrameId);
+      observer.disconnect();
     };
   }, [count, color]);
 

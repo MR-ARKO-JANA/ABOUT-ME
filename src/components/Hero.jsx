@@ -3,7 +3,6 @@ import * as THREE from 'three';
 import gsap from 'gsap';
 import { vertexShader, fragmentShader } from './HeroShaders';
 
-import imgSpiderman from '../assets/spiderman/20260407_055437.png';
 import imgMan from '../assets/man/arkojana.jpeg';
 
 export default function Hero() {
@@ -77,13 +76,12 @@ export default function Hero() {
     uniformRef.current = uniforms;
 
     Promise.all([
-      textureLoader.loadAsync(imgSpiderman),
       textureLoader.loadAsync(imgMan)
-    ]).then(([tex1, tex2]) => {
+    ]).then(([tex1]) => {
       // Use default ThreeJS filters for high quality mipmapping
       
       uniforms.uTexture1.value = tex1;
-      uniforms.uTexture2.value = tex2;
+      uniforms.uTexture2.value = tex1;
       
       // Update image resolution based on the first loaded texture's actual dimensions
       if (tex1.image) {
@@ -104,9 +102,15 @@ export default function Hero() {
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
+    let isVisible = true;
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+    });
+    observer.observe(container);
+
     // 4. GSAP Ticker for render loop and smooth lerping
     const renderTick = () => {
-      if (!isTexturesLoaded) return;
+      if (!isTexturesLoaded || !isVisible) return;
       
       // Lerp the mouse coordinates smoothly
       mouseCurrent.current.x = gsap.utils.interpolate(mouseCurrent.current.x, mouseTarget.current.x, 0.1);
@@ -218,6 +222,7 @@ export default function Hero() {
       renderer.dispose();
       material.dispose();
       geometry.dispose();
+      observer.disconnect();
     };
   }, []);
 

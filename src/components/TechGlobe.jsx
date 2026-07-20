@@ -89,9 +89,16 @@ export default function TechGlobe() {
     const items = container.querySelectorAll('.globe-item');
     const radius = Math.min(container.offsetWidth, container.offsetHeight) / 2.5;
 
+    let isVisible = true;
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+    });
+    observer.observe(container);
+
     const animate = () => {
-      rotationY += 0.005 + (mouseX * 0.02);
-      rotationX += 0.002 + (mouseY * 0.02);
+      if (isVisible) {
+        rotationY += 0.005 + (mouseX * 0.02);
+        rotationX += 0.002 + (mouseY * 0.02);
 
       const sinX = Math.sin(rotationX);
       const cosX = Math.cos(rotationX);
@@ -126,6 +133,7 @@ export default function TechGlobe() {
           }
         }
       });
+      }
 
       animationFrame = requestAnimationFrame(animate);
     };
@@ -138,6 +146,7 @@ export default function TechGlobe() {
       window.removeEventListener('resize', updateDim);
       container.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationFrame);
+      observer.disconnect();
     };
   }, [points]);
 
